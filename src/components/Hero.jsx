@@ -75,15 +75,15 @@ export default function Hero() {
               <span className={`text-rose italic ${isArabic ? 'not-italic' : ''}`}>&amp;</span> {copy.nameSecond}
             </h1>
 
-            <p className={`text-lg font-semibold tracking-wide text-ink sm:text-xl ${isArabic ? 'font-arabic' : 'font-serif italic'}`}>
+            <p className={`text-lg text-muted tracking-wide sm:text-xl ${isArabic ? 'font-arabic' : 'font-serif italic'}`}>
               {copy.inviteLine}
             </p>
 
             <div className="space-y-1.5">
-              <p className={`font-serif text-xl font-bold tracking-[0.08em] text-ink sm:text-2xl ${isArabic ? 'font-arabic tracking-normal' : ''}`}>
+              <p className={`font-serif text-lg tracking-[0.1em] text-ink sm:text-lg ${isArabic ? 'font-arabic tracking-normal' : ''}`}>
                 {copy.weekday} · {copy.date}
               </p>
-              <p className={`text-sm font-semibold uppercase tracking-[0.22em] text-ink/80 ${isArabic ? 'font-arabic tracking-[0.1em] normal-case text-base' : ''}`}>
+              <p className={`text-sm tracking-[0.22em] text-dim ${isArabic ? 'font-arabic tracking-[0.12em] normal-case text-base' : 'uppercase'}`}>
                 {copy.time} · {copy.venueName}
               </p>
             </div>

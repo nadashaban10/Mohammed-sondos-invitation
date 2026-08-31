@@ -35,7 +35,7 @@ export default function WeddingCalendar({ date = new Date(), label = 'Celebratio
           <div className={`mb-1.5 text-[10px] uppercase tracking-[0.45em] text-dim ${arabic ? 'font-arabic tracking-[0.16em] text-xs normal-case' : ''}`}>
             {label}
           </div>
-          <div className={`font-serif text-[1.65rem] font-bold leading-tight text-ink sm:text-3xl ${arabic ? 'font-arabic' : ''}`}>
+          <div className={`font-serif text-3xl font-light text-ink sm:text-4xl ${arabic ? 'font-arabic' : ''}`}>
             {monthName} {day}, {year}
           </div>
         </div>
@@ -59,11 +59,11 @@ export default function WeddingCalendar({ date = new Date(), label = 'Celebratio
               <div key={idx} className="flex items-center justify-center">
                 <div
                   className={[
-                    'flex h-8 w-8 items-center justify-center rounded-full text-sm sm:h-9 sm:w-9',
+                    'flex h-9 w-9 items-center justify-center rounded-full text-base sm:h-10 sm:w-10',
                     isSelected
-                      ? 'font-bold text-ink shadow-[0_8px_22px_rgba(209,148,153,0.18)]'
+                      ? 'text-ink shadow-[0_8px_22px_rgba(209,148,153,0.18)]'
                       : cell != null
-                        ? 'bg-white/55 font-semibold text-ink'
+                        ? 'bg-white/55 text-ink/80'
                         : 'text-transparent',
                   ].join(' ')}
                   style={

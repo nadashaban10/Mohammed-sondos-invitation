@@ -112,7 +112,7 @@ export default function RSVP() {
 
               <div className="mt-6 flex items-center justify-center gap-3">
                 <span className="h-px w-8" style={{ background: 'linear-gradient(to right, transparent, rgba(209,148,153,0.65))' }} />
-                <span className={`text-sm font-bold uppercase tracking-[0.2em] text-ink ${isArabic ? 'font-arabic tracking-[0.1em] normal-case text-base' : ''}`}>
+                <span className={`text-[10px] uppercase tracking-[0.32em] text-dim ${isArabic ? 'font-arabic tracking-[0.1em] normal-case' : ''}`}>
                   {copy.dateShort}
                 </span>
                 <span className="h-px w-8" style={{ background: 'linear-gradient(to left, transparent, rgba(209,148,153,0.65))' }} />

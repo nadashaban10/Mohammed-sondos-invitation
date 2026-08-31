@@ -63,7 +63,7 @@
   }
 
   .rose-btn {
-    @apply inline-flex items-center justify-center font-sans font-semibold tracking-[0.18em] text-[11px] uppercase px-10 py-3.5 cursor-pointer transition-all duration-300 hover:-translate-y-px;
+    @apply inline-flex items-center justify-center font-sans font-medium tracking-[0.18em] text-[11px] uppercase px-10 py-3.5 cursor-pointer transition-all duration-300 hover:-translate-y-px;
     color: #8f555b;
     background: rgba(255, 255, 255, 0.55);
     border: 1.5px solid rgba(209, 148, 153, 0.7);
@@ -86,7 +86,7 @@
   }
 
   [dir='rtl'] .rose-btn {
-    @apply font-arabic text-sm font-semibold tracking-[0.08em] normal-case;
+    @apply font-arabic text-sm font-normal tracking-[0.08em] normal-case;
   }
 
   .btn-spinner {
