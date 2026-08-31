@@ -112,7 +112,7 @@ export default function RSVP() {
 
               <div className="mt-6 flex items-center justify-center gap-3">
                 <span className="h-px w-8" style={{ background: 'linear-gradient(to right, transparent, rgba(209,148,153,0.65))' }} />
-                <span className={`text-[10px] uppercase tracking-[0.32em] text-dim ${isArabic ? 'font-arabic tracking-[0.1em] normal-case' : ''}`}>
+                <span className={`text-sm font-bold uppercase tracking-[0.2em] text-ink ${isArabic ? 'font-arabic tracking-[0.1em] normal-case text-base' : ''}`}>
                   {copy.dateShort}
                 </span>
                 <span className="h-px w-8" style={{ background: 'linear-gradient(to left, transparent, rgba(209,148,153,0.65))' }} />
@@ -171,8 +171,20 @@ export default function RSVP() {
               {error ? <p className="text-center text-sm italic text-rose">{error}</p> : null}
 
               <div className="pt-1 text-center">
-                <button type="submit" className="rose-btn" disabled={loading}>
-                  {loading ? copy.rsvpSending : copy.rsvpSubmit}
+                <button
+                  type="submit"
+                  className={`rose-btn ${loading ? 'is-loading' : ''}`}
+                  disabled={loading}
+                  aria-busy={loading}
+                >
+                  {loading ? (
+                    <span className="inline-flex items-center justify-center gap-3">
+                      <span className="btn-spinner" aria-hidden />
+                      <span>{copy.rsvpSending}</span>
+                    </span>
+                  ) : (
+                    copy.rsvpSubmit
+                  )}
                 </button>
               </div>
             </form>
