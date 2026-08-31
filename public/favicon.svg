@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mohamed and Sondos">
+  <rect width="64" height="64" rx="18" fill="#faf6f1"/>
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="none" stroke="#b08989" stroke-width="1.2"/>
+  <text x="32" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="18" fill="#2c2622">M&amp;S</text>
+</svg>
