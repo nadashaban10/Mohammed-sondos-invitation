@@ -3,11 +3,20 @@ import { INVITATION, detectBrowserLanguage } from '../invitationData'
 
 const LanguageContext = createContext(null)
 const STORAGE_KEY = 'invite-lang'
+const CHOSEN_KEY = 'invite-lang-chosen'
 
-function readStoredLang() {
+function applyDocumentLang(lang) {
+  if (typeof document === 'undefined') return
+  document.documentElement.lang = lang
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'
+  document.documentElement.style.colorScheme = 'light'
+}
+
+function readInitialLang() {
   try {
+    const chosen = localStorage.getItem(CHOSEN_KEY) === '1'
     const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored === 'ar' || stored === 'en') return stored
+    if (chosen && (stored === 'ar' || stored === 'en')) return stored
   } catch {
     /* ignore */
   }
@@ -16,33 +25,38 @@ function readStoredLang() {
 
 export function LanguageProvider({ children }) {
   const [lang, setLangState] = useState(() => {
-    const initial = readStoredLang()
-    if (typeof document !== 'undefined') {
-      document.documentElement.lang = initial
-      document.documentElement.dir = initial === 'ar' ? 'rtl' : 'ltr'
-    }
+    const initial = readInitialLang()
+    applyDocumentLang(initial)
     return initial
   })
 
   useEffect(() => {
-    const dir = lang === 'ar' ? 'rtl' : 'ltr'
-    document.documentElement.lang = lang
-    document.documentElement.dir = dir
-    document.documentElement.style.colorScheme = 'light'
+    applyDocumentLang(lang)
     document.title = INVITATION.copy[lang].documentTitle
-    try {
-      localStorage.setItem(STORAGE_KEY, lang)
-    } catch {
-      /* ignore */
-    }
   }, [lang])
 
   const setLang = useCallback((next) => {
-    setLangState(next === 'ar' ? 'ar' : 'en')
+    const resolved = next === 'ar' ? 'ar' : 'en'
+    setLangState(resolved)
+    try {
+      localStorage.setItem(STORAGE_KEY, resolved)
+      localStorage.setItem(CHOSEN_KEY, '1')
+    } catch {
+      /* ignore */
+    }
   }, [])
 
   const toggleLang = useCallback(() => {
-    setLangState((current) => (current === 'ar' ? 'en' : 'ar'))
+    setLangState((current) => {
+      const resolved = current === 'ar' ? 'en' : 'ar'
+      try {
+        localStorage.setItem(STORAGE_KEY, resolved)
+        localStorage.setItem(CHOSEN_KEY, '1')
+      } catch {
+        /* ignore */
+      }
+      return resolved
+    })
   }, [])
 
   const value = useMemo(() => {
@@ -63,6 +77,6 @@ export function LanguageProvider({ children }) {
 
 export function useLanguage() {
   const ctx = useContext(LanguageContext)
-  if (!ctx) throw new Error('useLanguage must be used within LanguageProvider')
+  if (!ctx) throw new Error('useLanguage must be used within a LanguageProvider')
   return ctx
 }

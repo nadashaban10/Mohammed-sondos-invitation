@@ -3,6 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        try {
+          var chosen = localStorage.getItem('invite-lang-chosen') === '1'
+          var stored = localStorage.getItem('invite-lang')
+          var lang
+          if (chosen && (stored === 'ar' || stored === 'en')) {
+            lang = stored
+          } else {
+            var list = (navigator.languages && navigator.languages.length
+              ? navigator.languages
+              : [navigator.language, navigator.userLanguage]
+            ).filter(Boolean)
+            lang = list.some(function (code) {
+              code = String(code).toLowerCase().replace('_', '-')
+              return code === 'ar' || code.indexOf('ar-') === 0
+            })
+              ? 'ar'
+              : 'en'
+          }
+          document.documentElement.lang = lang
+          document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'
+        } catch (e) {}
+      })()
+    </script>
     <meta
       name="description"
       content="Join Mohamed & Miss S for their Katb Kitab at Al-Ali Al-Azeem Mosque, Almazah, on 20 September 2026 at 9:30 PM."

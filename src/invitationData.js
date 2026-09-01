@@ -197,9 +197,10 @@ export function detectBrowserLanguage() {
   if (typeof navigator === 'undefined') return 'en'
   const candidates = [
     navigator.language,
+    navigator.userLanguage,
     ...(Array.isArray(navigator.languages) ? navigator.languages : []),
   ]
     .filter(Boolean)
-    .map((code) => String(code).toLowerCase())
+    .map((code) => String(code).toLowerCase().replace('_', '-'))
   return candidates.some((code) => code === 'ar' || code.startsWith('ar-')) ? 'ar' : 'en'
 }
