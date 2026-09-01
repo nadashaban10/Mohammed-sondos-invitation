@@ -9,6 +9,21 @@ export const QURAN = {
   refEn: 'Surah Ar-Rum · 30:21',
 }
 
+export const WELCOME = {
+  ar: 'أهلاً وسهلاً بكم',
+  en: 'Welcome, dear guests.',
+}
+
+export const CHILDHOOD_QUOTE = {
+  ar: 'نتمنى نوماً هنيئاً لأطفالنا',
+  en: 'We wish our children a peaceful sleep.',
+}
+
+export const BLESSING = {
+  ar: 'بَارَكَ اللهُ لَهُمَا وَبَارَكَ عَلَيْهِمَا وَجَمَعَ بَيْنَهُمَا فِي خَيْر',
+  en: 'May Allah bless them, shower His blessings upon them, and unite them in all that is good.',
+}
+
 /** Central invitation content — edit names, date, venue, assets, and translations here. */
 
 export const INVITATION = {
@@ -16,7 +31,7 @@ export const INVITATION = {
   audioFallback: '/audio/wedding-music.mp3',
   coupleImage: '/images/couple.png',
   mapsUrl:
-    'https://www.google.com/maps/search/?api=1&query=Al-Ali+Al-Azeem+Mosque+Almazah+Cairo+Egypt',
+    'https://www.google.com/maps?q=38QX%2B8C5+%D9%85%D8%B3%D8%AC%D8%AF+%D8%A7%D9%84%D8%B9%D9%84%D9%8A+%D8%A7%D9%84%D8%B9%D8%B8%D9%8A%D9%85+%D8%A7%D9%84%D9%85%D8%A7%D8%B8%D8%A9,+Almazah,+Heliopolis,+Cairo+Governorate+4461152',
   rsvpUrl:
     'https://script.google.com/macros/s/AKfycbxekTfzqJxesAikvHwmiI4gvPj3DdHHE93OFgdCjhHN1P-7SOuHsYcA0QvOhezeOza24A/exec',
   weddingDate: '2026-09-20T21:30:00',
@@ -29,21 +44,21 @@ export const INVITATION = {
   ],
   copy: {
     en: {
-      documentTitle: 'Mohamed & Sondos — Katb Kitab',
-      kicker: 'With gratitude · together with our families',
+      documentTitle: 'Mohamed & Miss S — Katb Kitab',
+      kicker: 'With love and joy, we welcome you',
       nameFirst: 'Mohamed',
-      nameSecond: 'Sondos',
-      namesLine: 'Mohamed & Sondos',
-      namesScript: 'Mohamed & Sondos',
+      nameSecond: 'Miss S',
+      namesLine: 'Mohamed & Miss S',
+      namesScript: 'Mohamed & Miss S',
       inviteLine: 'Request the pleasure of your company',
-      coupleAlt: 'Mohamed and Sondos as children, embracing and smiling',
+      coupleAlt: 'Mohamed and Miss S as children, embracing and smiling',
       openInvite: 'Open invitation',
       eventLabel: 'Katb Kitab',
       eventKicker: 'The celebration',
       date: '20 September 2026',
       dateShort: '20 · 09 · 2026',
       time: '9:30 PM',
-      weekday: 'Saturday',
+      weekday: 'Sunday',
       countdown: 'Counting down',
       days: 'Days',
       hours: 'Hours',
@@ -52,11 +67,10 @@ export const INVITATION = {
       addCalendar: 'Google Calendar',
       calendarLabel: 'Katb Kitab day',
       saveTheDate: 'Save the date',
-      scrollHint: 'Scroll or use arrow keys',
       venueKicker: 'The venue',
       venueName: 'Al-Ali Al-Azeem Mosque',
       venueArabicName: 'مسجد العلي العظيم',
-      venueArea: 'Almazah, Cairo, Egypt',
+      venueArea: 'Almazah, Heliopolis, Cairo, Egypt',
       venueDescription:
         'A contemporary Egyptian mosque of ivory marble, quiet arches, and warm light in Almazah.',
       venueNote: 'Kindly arrive a few minutes early.',
@@ -87,6 +101,11 @@ export const INVITATION = {
       rsvpThanks: 'With love,',
       rsvpEdit: 'Edit response',
       closing: 'With love',
+      photoCaption: 'Welcome, dear guests',
+      shareCta: 'Share invitation',
+      shareCopyLink: 'Copy invitation link',
+      shareWhatsApp: 'WhatsApp',
+      shareCopied: 'Invitation link copied',
       navHome: 'Home',
       navVenue: 'Venue',
       navRsvp: 'RSVP',
@@ -98,21 +117,21 @@ export const INVITATION = {
       musicHint: 'Tap to play music',
     },
     ar: {
-      documentTitle: 'محمد و سندس — عقد القرآن',
-      kicker: 'بمباركة أهلهما',
+      documentTitle: 'محمد و الأنسه S — عقد القرآن',
+      kicker: 'بكل حب وفرح نرحب بكم',
       nameFirst: 'محمد',
-      nameSecond: 'سندس',
-      namesLine: 'محمد & سندس',
-      namesScript: 'محمد & سندس',
+      nameSecond: 'الأنسه S',
+      namesLine: 'محمد و الأنسه S',
+      namesScript: 'محمد و الأنسه S',
       inviteLine: 'يتشرفان بدعوتكم لحضور عقد القرآن',
-      coupleAlt: 'محمد وسندس في الطفولة، يتعانقان ويبتسمان',
+      coupleAlt: 'محمد والأنسه S في الطفولة، يتعانقان ويبتسمان',
       openInvite: 'افتحوا الدعوة',
       eventLabel: 'عقد القرآن',
       eventKicker: 'المناسبة',
       date: '20 سبتمبر 2026',
       dateShort: '20 · 09 · 2026',
       time: '9:30 مساءً',
-      weekday: 'السبت',
+      weekday: 'الأحد',
       countdown: 'العد التنازلي',
       days: 'يوم',
       hours: 'ساعة',
@@ -121,11 +140,10 @@ export const INVITATION = {
       addCalendar: 'أضيفوا للتقويم',
       calendarLabel: 'يوم عقد القرآن',
       saveTheDate: 'احفظوا الموعد',
-      scrollHint: 'مرروا للأسفل',
       venueKicker: 'المكان',
       venueName: 'مسجد العلي العظيم',
       venueArabicName: 'مسجد العلي العظيم',
-      venueArea: 'ألماظة، القاهرة، مصر',
+      venueArea: 'ألماظة، مصر الجديدة، القاهرة، مصر',
       venueDescription: 'صرح إسلامي معاصر من الرخام العاجي والأقواس الهادئة في ألماظة.',
       venueNote: 'يرجى الحضور قبل الموعد بدقائق.',
       venueAlts: {
@@ -155,6 +173,13 @@ export const INVITATION = {
       rsvpThanks: 'بكل حب،',
       rsvpEdit: 'تعديل الرد',
       closing: 'بكل حب',
+      photoCaption: 'أهلاً وسهلاً بكم',
+      childhoodQuote: 'نتمنى نوماً هنيئاً لأطفالنا',
+      blessing: 'بَارَكَ اللهُ لَهُمَا وَبَارَكَ عَلَيْهِمَا وَجَمَعَ بَيْنَهُمَا فِي خَيْر',
+      shareCta: 'شاركوا الدعوة',
+      shareCopyLink: 'انسخوا رابط الدعوة',
+      shareWhatsApp: 'واتساب',
+      shareCopied: 'تم نسخ رابط الدعوة',
       navHome: 'الرئيسية',
       navVenue: 'المكان',
       navRsvp: 'الحضور',

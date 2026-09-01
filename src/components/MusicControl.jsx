@@ -18,7 +18,7 @@ export default function MusicControl() {
         aria-label={label}
         title={label}
           className={[
-            'flex h-12 w-12 items-center justify-center rounded-full border border-rose/30 bg-white/30 text-rose shadow-[0_10px_28px_rgba(209,148,153,0.14)] backdrop-blur-md transition duration-500 hover:border-rose/55 hover:bg-white/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose/40 touch-manipulation',
+            'flex h-12 w-12 items-center justify-center rounded-full border border-gold/50 bg-paper/70 text-rose shadow-[0_10px_28px_var(--shadow-ink)] backdrop-blur-md transition duration-500 hover:border-gold hover:bg-paper focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 touch-manipulation',
           blocked && !isPlaying ? 'music-pulse' : '',
         ].join(' ')}
       >

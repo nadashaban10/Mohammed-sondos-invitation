@@ -4,33 +4,34 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['"Cormorant Garamond"', 'serif'],
-        sans: ['Jost', 'sans-serif'],
+        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        sans: ['Cinzel', 'serif'],
         arabic: ['Amiri', 'serif'],
-        script: ['"Great Vibes"', 'cursive'],
+        script: ['"Pinyon Script"', 'cursive'],
+        ruqaa: ['"Aref Ruqaa"', 'Amiri', 'serif'],
       },
       colors: {
-        ink: '#2c2622',
-        paper: '#ffffff',
-        mist: '#fbf8f7',
+        ink: 'rgba(var(--rgb-foreground), <alpha-value>)',
+        paper: 'rgba(var(--rgb-surface), <alpha-value>)',
+        mist: 'rgba(var(--rgb-background), <alpha-value>)',
+        muted: 'rgba(var(--rgb-muted), <alpha-value>)',
+        dim: 'rgba(var(--rgb-muted), <alpha-value>)',
         rose: {
-          DEFAULT: '#d19499',
-          soft: '#e2b8bb',
-          pale: '#f8f0f1',
-          dark: '#b57a7f',
+          DEFAULT: 'rgba(var(--rgb-primary), <alpha-value>)',
         },
-        champagne: {
-          DEFAULT: '#d4c2a8',
-          light: '#eee3d4',
+        gold: {
+          DEFAULT: 'rgba(var(--rgb-accent), <alpha-value>)',
+          soft: 'rgba(var(--rgb-accent-soft), <alpha-value>)',
+          deep: 'rgba(var(--rgb-accent-deep), <alpha-value>)',
         },
-        muted: '#6b6058',
-        dim: '#8a7e76',
       },
       animation: {
         'fade-up': 'fadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) both',
         'fade-in': 'fadeIn 1s ease both',
         'scale-in': 'scaleIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both',
         'float-slow': 'floatSlow 7s ease-in-out infinite',
+        'float-flora': 'floatFlora 8s ease-in-out infinite',
+        'float-flora-alt': 'floatFloraAlt 9.5s ease-in-out infinite',
         'float-petal': 'floatPetal 5s ease-in-out infinite',
         'shimmer-line': 'shimmerLine 2.4s ease-in-out infinite',
       },
@@ -50,6 +51,14 @@ export default {
         floatSlow: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-8px)' },
+        },
+        floatFlora: {
+          '0%, 100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+          '50%': { transform: 'translate3d(10px, -16px, 0) rotate(5deg)' },
+        },
+        floatFloraAlt: {
+          '0%, 100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+          '50%': { transform: 'translate3d(-12px, 12px, 0) rotate(-6deg)' },
         },
         floatPetal: {
           '0%, 100%': {

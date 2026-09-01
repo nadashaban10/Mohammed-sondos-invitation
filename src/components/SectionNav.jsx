@@ -56,8 +56,8 @@ export default function SectionNav({ rootRef }) {
         return (
           <button key={s.id} type="button" onClick={() => go(s.id)} className="group relative flex items-center justify-end outline-none" aria-current={on ? 'true' : undefined} aria-label={s.label}>
             <span
-              className="pointer-events-none absolute end-8 whitespace-nowrap rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.25em] opacity-0 transition duration-300 group-hover:opacity-100"
-              style={{ background: 'rgba(44,38,34,0.88)', color: 'rgba(255,255,255,0.92)', border: '1px solid rgba(209,148,153,0.25)' }}
+              className="pointer-events-none absolute end-8 whitespace-nowrap rounded-full px-3 py-1 font-sans text-[10px] uppercase tracking-[0.25em] opacity-0 transition duration-300 group-hover:opacity-100"
+              style={{ background: 'rgba(var(--rgb-primary),0.9)', color: 'var(--color-on-primary)', border: '1px solid rgba(var(--rgb-accent),0.35)' }}
             >
               {s.label}
             </span>
@@ -66,8 +66,8 @@ export default function SectionNav({ rootRef }) {
               style={{
                 width: on ? 14 : 9,
                 height: on ? 14 : 9,
-                background: on ? 'linear-gradient(145deg, #e2b8bb, #d19499)' : 'rgba(44,38,34,0.2)',
-                boxShadow: on ? '0 0 0 4px rgba(209,148,153,0.25)' : 'none',
+                background: on ? 'linear-gradient(145deg, rgb(var(--rgb-accent-soft)), rgb(var(--rgb-accent)))' : 'rgba(var(--rgb-foreground),0.2)',
+                boxShadow: on ? '0 0 0 4px rgba(var(--rgb-accent),0.28)' : 'none',
               }}
             />
           </button>

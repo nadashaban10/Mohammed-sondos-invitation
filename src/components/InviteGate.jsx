@@ -1,5 +1,7 @@
-import { useState } from 'react'
-import { QURAN } from '../invitationData'
+import { useEffect, useState } from 'react'
+import { QURAN, WELCOME, CHILDHOOD_QUOTE } from '../invitationData'
+import MixedName from './MixedName'
+import Petals from './Petals'
 import { useLanguage } from '../context/LanguageProvider'
 import { useMusic } from '../context/MusicProvider'
 
@@ -9,11 +11,49 @@ const IMG_FLOWERRR = '/images/flowerrr.png'
 
 function GateBackdropBotanicals() {
   return (
-    <div className="pointer-events-none absolute inset-0 z-[1] min-h-[100dvh] overflow-hidden" aria-hidden>
-      <img src={IMG_FLORA} alt="" className="absolute -bottom-[10%] -right-[12%] w-[min(56vw,300px)] max-w-none opacity-[0.52] mix-blend-multiply motion-safe:animate-float-slow" loading="lazy" decoding="async" />
-      <img src={IMG_FLOWER} alt="" className="absolute -left-[16%] top-[5%] w-[min(48vw,260px)] max-w-none opacity-[0.44] mix-blend-multiply motion-safe:animate-float-slow motion-safe:[animation-delay:1s]" loading="lazy" decoding="async" />
-      <img src={IMG_FLOWERRR} alt="" className="absolute left-1/2 top-[10%] w-[min(88vw,460px)] max-w-none -translate-x-1/2 opacity-[0.28] mix-blend-multiply motion-safe:animate-float-slow motion-safe:[animation-delay:0.45s]" loading="lazy" decoding="async" />
+    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+      <div className="absolute -left-[18%] top-[2%] w-[min(46vw,230px)] rotate-[-18deg]">
+        <img
+          src={IMG_FLOWERRR}
+          alt=""
+          className="w-full max-w-none opacity-[0.5] mix-blend-multiply will-change-transform motion-safe:animate-float-flora"
+          style={{ animationDelay: '0.35s' }}
+          decoding="async"
+        />
+      </div>
+      <div className="absolute -right-[14%] top-[18%] w-[min(42vw,210px)] rotate-[12deg]">
+        <img
+          src={IMG_FLOWER}
+          alt=""
+          className="w-full max-w-none opacity-[0.52] mix-blend-multiply will-change-transform motion-safe:animate-float-flora-alt"
+          style={{ animationDelay: '1.1s' }}
+          decoding="async"
+        />
+      </div>
+      <div className="absolute bottom-[12%] -right-[12%] w-[min(62vw,340px)]">
+        <img
+          src={IMG_FLORA}
+          alt=""
+          className="w-full max-w-none opacity-[0.62] mix-blend-multiply will-change-transform motion-safe:animate-float-flora"
+          style={{ animationDelay: '0.8s' }}
+          decoding="async"
+        />
+      </div>
     </div>
+  )
+}
+
+function OrnamentRule() {
+  return (
+    <svg className="mx-auto mt-5 mb-1 h-[18px] w-[180px] max-w-[62%]" viewBox="0 0 200 18" aria-hidden="true">
+      <g fill="none" stroke="currentColor" strokeWidth="1" className="text-gold">
+        <line x1="0" y1="9" x2="76" y2="9" />
+        <circle cx="84" cy="9" r="1.6" fill="currentColor" stroke="none" />
+        <path d="M100 2 L107 9 L100 16 L93 9 Z" />
+        <circle cx="116" cy="9" r="1.6" fill="currentColor" stroke="none" />
+        <line x1="124" y1="9" x2="200" y2="9" />
+      </g>
+    </svg>
   )
 }
 
@@ -23,81 +63,148 @@ export default function InviteGate({ onOpen }) {
   const [opened, setOpened] = useState(false)
   const [closing, setClosing] = useState(false)
 
+  useEffect(() => {
+    const html = document.documentElement
+    const body = document.body
+    const prevHtml = html.style.overflow
+    const prevBody = body.style.overflow
+    html.style.overflow = 'hidden'
+    body.style.overflow = 'hidden'
+    return () => {
+      html.style.overflow = prevHtml
+      body.style.overflow = prevBody
+    }
+  }, [])
+
   if (opened) return null
 
   return (
-    <div className="fixed inset-0 z-[100] min-h-[100dvh] w-full max-w-none" role="dialog" aria-modal="true" aria-label={copy.openInvite}>
-      <div className="absolute inset-0 min-h-[100dvh] w-full">
-        <img src={invitation.coupleImage} alt="" className="h-full min-h-[100dvh] w-full object-cover" loading="eager" />
+    <div className="invite-gate" role="dialog" aria-modal="true" aria-label={copy.openInvite}>
+      <div className="absolute inset-0">
+        <img src={invitation.coupleImage} alt="" className="h-full w-full object-cover" loading="eager" />
         <div
           className="absolute inset-0"
           style={{
             background: `
-              radial-gradient(ellipse 85% 55% at 50% 15%, rgba(201, 169, 166, 0.12) 0%, transparent 50%),
-              linear-gradient(165deg, rgba(255,253,251,0.2) 0%, rgba(250,247,244,0.35) 45%, rgba(44, 38, 34, 0.28) 100%)
+              radial-gradient(ellipse 85% 55% at 50% 15%, rgba(var(--rgb-accent-soft), 0.18) 0%, transparent 50%),
+              linear-gradient(165deg, rgba(var(--rgb-surface), 0.22) 0%, rgba(var(--rgb-background), 0.42) 45%, rgba(var(--rgb-primary), 0.28) 100%)
             `,
           }}
         />
       </div>
 
-      <GateBackdropBotanicals />
-
       <div
-        className="relative z-[3] flex min-h-[100dvh] w-full flex-col overflow-y-auto overscroll-y-contain transition-all duration-[700ms] ease-out"
-        style={closing ? { opacity: 0, transform: 'scale(0.98) translateY(12px)' } : { opacity: 1 }}
+        className="invite-gate-scroll"
+        style={closing ? { opacity: 0, transform: 'scale(0.98) translateY(12px)', transition: 'opacity 700ms ease, transform 700ms ease' } : { opacity: 1, transition: 'opacity 700ms ease, transform 700ms ease' }}
       >
         <div
-          className="relative flex min-h-[100dvh] w-full flex-1 flex-col justify-center px-6 pt-[max(4.75rem,calc(env(safe-area-inset-top)+3.5rem))] pb-[max(5.5rem,calc(env(safe-area-inset-bottom)+4.25rem))] text-ink backdrop-blur-xl sm:px-10"
+          className="relative flex min-h-full w-full flex-col px-6 pt-[max(5rem,calc(env(safe-area-inset-top)+3.75rem))] pb-[max(8rem,calc(env(safe-area-inset-bottom)+6.5rem))] text-ink backdrop-blur-xl sm:px-10"
           style={{
-            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.62) 0%, rgba(250, 247, 244, 0.5) 100%)',
+            background: 'linear-gradient(180deg, rgba(var(--rgb-surface), 0.82) 0%, rgba(var(--rgb-background), 0.78) 100%)',
             boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.35)',
           }}
         >
+          <GateBackdropBotanicals />
+          <Petals count={10} className="z-[1] opacity-70" />
+
           <div
-            className="pointer-events-none absolute left-6 right-6 top-0 h-px sm:left-10 sm:right-10"
-            style={{ background: 'linear-gradient(90deg, transparent, rgba(176, 137, 137, 0.45), transparent)' }}
+            className="pointer-events-none absolute left-6 right-6 top-0 z-[2] h-px sm:left-10 sm:right-10"
+            style={{ background: 'linear-gradient(90deg, transparent, rgba(var(--rgb-accent), 0.5), transparent)' }}
             aria-hidden
           />
 
-          <blockquote className="mx-auto mt-2 max-w-xl text-center font-arabic animate-fade-up anim-delay-1" dir="rtl" lang="ar" style={{ color: '#8a6a6a' }}>
-            <p className="mb-3 text-[clamp(0.8rem,2.9vw,1.02rem)] leading-relaxed tracking-wide">{QURAN.basmala}</p>
-            <p className="text-[clamp(0.72rem,2.6vw,0.95rem)] leading-[1.78]">{QURAN.verse}</p>
+          <div className="relative z-[2] flex flex-col">
+
+          <blockquote className="mx-auto mt-2 max-w-xl text-center font-arabic text-ink animate-fade-up anim-delay-1" dir="rtl" lang="ar">
+            <p className="mb-3 text-[clamp(0.95rem,3.2vw,1.18rem)] leading-relaxed tracking-wide">{QURAN.basmala}</p>
+            <p className="text-[clamp(0.88rem,3vw,1.12rem)] leading-[1.85]">{QURAN.verse}</p>
           </blockquote>
 
-          <p className="mx-auto mt-3 max-w-md text-center font-serif text-[11px] italic leading-relaxed sm:text-[12px] animate-fade-up anim-delay-2" style={{ color: '#6b6058' }}>
+          <p className="mx-auto mt-3 max-w-md text-center font-serif text-[13px] italic leading-relaxed text-ink sm:text-[15px] animate-fade-up anim-delay-2">
             {QURAN.verseEn}
           </p>
-          <p className="mt-4 text-center text-[10px] uppercase tracking-[0.38em] animate-fade-up anim-delay-1" style={{ color: '#8a6a6a' }}>
+          <p className={`mt-4 text-center text-[11px] tracking-[0.32em] text-rose animate-fade-up anim-delay-1 ${isArabic ? 'font-arabic tracking-[0.12em] text-sm normal-case' : 'font-sans uppercase'}`}>
             {isArabic ? QURAN.ref : QURAN.refEn}
           </p>
 
-          <div className="mx-auto mt-3 h-px w-20" style={{ background: 'linear-gradient(90deg, transparent, rgba(176, 137, 137, 0.5), transparent)' }} />
+          <OrnamentRule />
 
-          <div
-            className={`mx-auto mt-4 max-w-[min(100%,24rem)] text-center leading-none animate-fade-up anim-delay-3 ${isArabic ? 'font-arabic' : 'font-script'}`}
-            style={{ fontSize: 'clamp(44px, 9.5vw, 72px)', color: '#8a6a6a' }}
-          >
-            {copy.namesScript}
+          <h1 className={`names mx-auto mt-5 text-center animate-fade-up anim-delay-3 ${isArabic ? 'is-ar' : ''}`}>
+            <span className="block">{isArabic ? <MixedName text={copy.nameFirst} /> : copy.nameFirst}</span>
+            <span className="names-amp my-2 block leading-none" style={{ fontSize: '0.72em' }}>
+              &amp;
+            </span>
+            <span className="block">{isArabic ? <MixedName text={copy.nameSecond} /> : copy.nameSecond}</span>
+          </h1>
+
+          <div className="mx-auto mt-6 max-w-md space-y-4 text-center animate-fade-up anim-delay-3">
+            <div>
+              <p className="quote-ar font-ruqaa text-[clamp(1.1rem,4vw,1.4rem)] leading-[1.9] tracking-normal" dir="rtl" lang="ar">
+                {WELCOME.ar}
+              </p>
+              <p className="mt-1 font-serif text-sm italic text-ink sm:text-[15px]">
+                {WELCOME.en}
+              </p>
+            </div>
+            <div>
+              <p className="quote-ar font-ruqaa text-[clamp(1.15rem,4.2vw,1.5rem)] leading-[1.9] tracking-normal" dir="rtl" lang="ar">
+                «{CHILDHOOD_QUOTE.ar}»
+              </p>
+              <p className="mt-1 font-serif text-sm italic text-ink sm:text-[15px]">
+                {CHILDHOOD_QUOTE.en}
+              </p>
+            </div>
           </div>
 
-          <div className="mt-5 flex items-center justify-center gap-3 text-[11px] uppercase tracking-[0.36em] animate-fade-up anim-delay-4" style={{ color: '#8a7e76' }}>
-            <span className="h-px w-8" style={{ background: 'linear-gradient(to right, transparent, rgba(176, 137, 137, 0.55))' }} />
-            <span className={`text-ink ${isArabic ? 'font-arabic tracking-[0.12em] normal-case' : ''}`}>{copy.dateShort}</span>
-            <span className="h-px w-8" style={{ background: 'linear-gradient(to left, transparent, rgba(176, 137, 137, 0.55))' }} />
+          <div className="gate-details mx-auto mt-5 w-full max-w-[18.5rem] text-center animate-fade-up anim-delay-4">
+            <p
+              className={`text-[12px] leading-snug sm:text-[13px] ${
+                isArabic
+                  ? 'font-arabic tracking-normal'
+                  : 'font-sans uppercase tracking-[0.16em]'
+              }`}
+            >
+              {copy.weekday}
+              <span className="mx-1.5 text-gold" aria-hidden>
+                ·
+              </span>
+              {copy.date}
+            </p>
+            <p
+              className={`mt-1.5 text-[1.35rem] leading-none sm:text-[1.45rem] ${
+                isArabic ? 'font-arabic' : 'font-serif font-light tracking-[0.12em]'
+              }`}
+            >
+              {copy.time}
+            </p>
+
+            <div className="mx-auto my-3 flex items-center justify-center gap-2" aria-hidden>
+              <span className="h-px w-10 bg-gold/40" />
+              <span className="block h-[5px] w-[5px] rotate-45 bg-gold/70" />
+              <span className="h-px w-10 bg-gold/40" />
+            </div>
+
+            <p className={`text-[15px] leading-snug sm:text-base ${isArabic ? 'font-arabic' : 'font-serif tracking-[0.04em]'}`}>
+              {copy.venueName}
+            </p>
+            {!isArabic ? (
+              <p className="mt-0.5 font-arabic text-[13px] leading-snug" dir="rtl" lang="ar">
+                {copy.venueArabicName}
+              </p>
+            ) : null}
+            <p className={`mt-1 text-[12px] leading-snug text-muted sm:text-[13px] ${isArabic ? 'font-arabic' : 'font-serif'}`}>
+              {copy.venueArea}
+            </p>
           </div>
 
-          <p className={`mt-4 text-center text-[11px] uppercase tracking-[0.32em] animate-fade-up anim-delay-4 ${isArabic ? 'font-arabic tracking-[0.12em] normal-case' : ''}`} style={{ color: '#6b6058' }}>
-            {copy.venueArea}
-          </p>
-
-          <div className="mt-10 flex flex-col items-center gap-4">
+          <div className="mt-6 flex flex-col items-center pb-4">
             <button
               type="button"
-              className="group relative isolate overflow-hidden rounded-full px-10 py-4 font-sans text-[10px] font-medium uppercase tracking-[0.38em] shadow-[inset_0_1px_0_rgba(255,255,255,0.65),0_8px_32px_rgba(44,38,34,0.08)] backdrop-blur-md transition-all duration-500 hover:-translate-y-0.5 sm:px-14 sm:text-[11px]"
+              className={`min-h-14 rounded-full px-12 font-sans text-[12px] uppercase tracking-[0.18em] text-rose shadow-[0_10px_28px_var(--shadow-ink)] transition-all duration-500 hover:-translate-y-0.5 hover:shadow-[0_14px_32px_var(--shadow-ink)] ${isArabic ? 'font-arabic text-base tracking-[0.08em] normal-case' : ''}`}
               style={{
-                color: '#8a6a6a',
-                border: '1.5px solid rgba(176, 137, 137, 0.55)',
-                background: 'linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.18))',
+                border: '1.5px solid var(--border-strong)',
+                background: 'linear-gradient(180deg, rgba(var(--rgb-surface), 0.92), rgba(var(--rgb-background), 0.72))',
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.7), 0 10px 28px var(--shadow-ink)',
               }}
               onClick={() => {
                 if (closing) return
@@ -109,12 +216,9 @@ export default function InviteGate({ onOpen }) {
                 }, 680)
               }}
             >
-              <span className={`relative flex items-center justify-center gap-3 sm:gap-4 ${isArabic ? 'font-arabic tracking-[0.12em] text-sm normal-case' : ''}`}>
-                <span className="h-px w-7" style={{ background: 'linear-gradient(to right, transparent, rgba(176,137,137,0.8))' }} aria-hidden />
-                <span className="whitespace-nowrap">{copy.openInvite}</span>
-                <span className="h-px w-7" style={{ background: 'linear-gradient(to left, transparent, rgba(176,137,137,0.8))' }} aria-hidden />
-              </span>
+              {copy.openInvite}
             </button>
+          </div>
           </div>
         </div>
       </div>

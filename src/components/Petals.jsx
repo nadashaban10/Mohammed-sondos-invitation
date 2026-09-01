@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const COLORS = ['rgba(226, 184, 187, 0.95)', 'rgba(209, 148, 153, 0.88)', 'rgba(212, 194, 168, 0.7)']
+const COLORS = ['rgba(var(--rgb-accent), 0.92)', 'rgba(var(--rgb-primary), 0.78)', 'rgba(var(--rgb-accent-soft), 0.8)']
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false)

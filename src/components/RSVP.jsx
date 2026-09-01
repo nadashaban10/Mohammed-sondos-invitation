@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Petals from './Petals'
+import MixedName from './MixedName'
 import { useLanguage } from '../context/LanguageProvider'
 
 const INITIAL = {
@@ -42,7 +43,7 @@ export default function RSVP() {
   }
 
   return (
-    <section id="rsvp" className="snap-panel relative flex flex-col items-center justify-center overflow-hidden bg-transparent px-5 py-14 sm:px-8">
+    <section id="rsvp" className="snap-panel relative flex flex-col items-center justify-center overflow-hidden bg-transparent px-5 py-14 pb-28 sm:px-8 sm:pb-32">
       <Petals count={6} className="z-0 opacity-[0.38] motion-safe:animate-fade-in" />
 
       <div className="relative z-[1] mx-auto w-full max-w-xl">
@@ -52,9 +53,9 @@ export default function RSVP() {
           <article
             className="overflow-hidden rounded-[28px] text-center animate-scale-in backdrop-blur-md"
             style={{
-              border: '1px solid rgba(209,148,153,0.28)',
+              border: '1px solid rgba(var(--rgb-accent),0.28)',
               background: 'rgba(255,255,255,0.38)',
-              boxShadow: '0 28px 70px rgba(209,148,153,0.16)',
+              boxShadow: '0 28px 70px var(--shadow-accent)',
             }}
           >
             <div className="relative h-52 overflow-hidden sm:h-64">
@@ -69,8 +70,8 @@ export default function RSVP() {
                 style={{
                   background:
                     form.attending === 'yes'
-                      ? 'linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,248,247,0.18) 42%, rgba(255,251,250,0.96) 100%)'
-                      : 'linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,251,249,0.42) 48%, rgba(255,251,250,0.97) 100%)',
+                      ? 'linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(var(--rgb-surface),0.18) 42%, rgba(var(--rgb-surface),0.96) 100%)'
+                      : 'linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(var(--rgb-background),0.42) 48%, rgba(var(--rgb-surface),0.97) 100%)',
                 }}
               />
               <img
@@ -83,14 +84,14 @@ export default function RSVP() {
 
             <div className="relative -mt-16 px-7 pb-10 sm:px-10">
               <div
-                className="mx-auto mb-5 h-[5.25rem] w-[5.25rem] overflow-hidden rounded-full shadow-[0_12px_32px_rgba(44,38,34,0.14)] sm:h-24 sm:w-24"
-                style={{ border: '3px solid rgba(255,255,255,0.92)', boxShadow: '0 0 0 1px rgba(209,148,153,0.35), 0 12px 32px rgba(44,38,34,0.14)' }}
+                className="mx-auto mb-5 h-[5.25rem] w-[5.25rem] overflow-hidden rounded-full shadow-[0_12px_32px_var(--shadow-ink)] sm:h-24 sm:w-24"
+                style={{ border: '3px solid rgba(255,255,255,0.92)', boxShadow: '0 0 0 1px rgba(var(--rgb-accent),0.35), 0 12px 32px var(--shadow-ink)' }}
               >
                 <img src={invitation.coupleImage} alt="" className="h-full w-full object-cover object-[center_38%]" />
               </div>
 
-              <p className={`text-[10px] uppercase tracking-[0.38em] text-rose ${isArabic ? 'font-arabic tracking-[0.12em] text-sm normal-case' : ''}`}>
-                {copy.namesLine}
+              <p className={`names-line text-[clamp(1.1rem,3vw,1.45rem)] ${isArabic ? 'is-ar' : ''}`}>
+                {isArabic ? <MixedName text={copy.namesLine} /> : copy.namesLine}
               </p>
               <h2 className={`mt-3 font-light leading-tight text-ink ${isArabic ? 'font-arabic text-[1.85rem] sm:text-3xl' : 'font-serif text-[1.85rem] sm:text-[2.2rem]'}`}>
                 {form.attending === 'yes' ? copy.rsvpThanksYes : copy.rsvpThanksNo}
@@ -105,17 +106,19 @@ export default function RSVP() {
               >
                 {form.attending === 'yes' ? copy.rsvpReceived : copy.rsvpDeclined}
               </p>
-              <p className={`mt-5 font-light text-ink ${isArabic ? 'font-arabic text-lg' : 'font-script text-[1.65rem] leading-none'}`}>
+              <p className={`names-line mt-5 ${isArabic ? 'text-lg' : 'text-[1.65rem] leading-none'}`}>
                 {copy.rsvpThanks}
               </p>
-              <p className={`mt-1 text-sm text-rose ${isArabic ? 'font-arabic' : 'font-serif italic'}`}>{copy.namesLine}</p>
+              <p className={`names-line mt-1 text-[clamp(1.05rem,2.8vw,1.35rem)] ${isArabic ? 'is-ar' : ''}`}>
+                {isArabic ? <MixedName text={copy.namesLine} /> : copy.namesLine}
+              </p>
 
               <div className="mt-6 flex items-center justify-center gap-3">
-                <span className="h-px w-8" style={{ background: 'linear-gradient(to right, transparent, rgba(209,148,153,0.65))' }} />
+                <span className="h-px w-8" style={{ background: 'linear-gradient(to right, transparent, rgba(var(--rgb-accent),0.65))' }} />
                 <span className={`text-[10px] uppercase tracking-[0.32em] text-dim ${isArabic ? 'font-arabic tracking-[0.1em] normal-case' : ''}`}>
                   {copy.dateShort}
                 </span>
-                <span className="h-px w-8" style={{ background: 'linear-gradient(to left, transparent, rgba(209,148,153,0.65))' }} />
+                <span className="h-px w-8" style={{ background: 'linear-gradient(to left, transparent, rgba(var(--rgb-accent),0.65))' }} />
               </div>
 
               <div className="mt-8">
@@ -135,18 +138,18 @@ export default function RSVP() {
         ) : (
           <div
             className="relative rounded-[28px] p-8 animate-fade-up anim-delay-1 backdrop-blur-md sm:p-10"
-            style={{ border: '1px solid rgba(209,148,153,0.22)', background: 'rgba(255,255,255,0.32)', boxShadow: '0 22px 65px rgba(209,148,153,0.12)' }}
+            style={{ border: '1px solid var(--border-subtle)', background: 'var(--surface-glass)', boxShadow: '0 22px 65px var(--shadow-accent)' }}
           >
             <form onSubmit={handleSubmit} className="space-y-8">
               <div>
-                <label className={`mb-1 block text-[10px] uppercase tracking-[0.28em] text-dim ${isArabic ? 'font-arabic tracking-[0.1em] text-sm normal-case' : ''}`}>
+                <label className={`mb-1 block font-sans text-[10px] uppercase tracking-[0.28em] text-dim ${isArabic ? 'font-arabic tracking-[0.1em] text-sm normal-case' : ''}`}>
                   {copy.rsvpName}
                 </label>
                 <input className="form-input" required placeholder={copy.rsvpNamePh} value={form.name} onChange={(e) => set('name', e.target.value)} />
               </div>
 
               <div>
-                <p className={`mb-4 text-[10px] uppercase tracking-[0.28em] text-dim ${isArabic ? 'font-arabic tracking-[0.1em] text-sm normal-case' : ''}`}>
+                <p className={`mb-4 font-sans text-[10px] uppercase tracking-[0.28em] text-dim ${isArabic ? 'font-arabic tracking-[0.1em] text-sm normal-case' : ''}`}>
                   {copy.rsvpAttend}
                 </p>
                 <div className="flex flex-wrap gap-3">
@@ -162,7 +165,7 @@ export default function RSVP() {
               </div>
 
               <div>
-                <label className={`mb-1 block text-[10px] uppercase tracking-[0.28em] text-dim ${isArabic ? 'font-arabic tracking-[0.1em] text-sm normal-case' : ''}`}>
+                <label className={`mb-1 block font-sans text-[10px] uppercase tracking-[0.28em] text-dim ${isArabic ? 'font-arabic tracking-[0.1em] text-sm normal-case' : ''}`}>
                   {copy.rsvpMessage}
                 </label>
                 <textarea className="form-input resize-none" rows={3} placeholder={copy.rsvpMessagePh} value={form.message} onChange={(e) => set('message', e.target.value)} />

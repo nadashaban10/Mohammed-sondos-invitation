@@ -8,23 +8,23 @@ export default function VenueSection() {
   const current = images[active] || images[0]
 
   return (
-    <section id="venue" className="snap-panel flex flex-col items-center justify-center bg-transparent px-5 py-8 sm:px-8 sm:py-10">
+    <section id="venue" className="snap-panel flex flex-col items-center justify-center bg-transparent px-5 py-8 pb-24 sm:px-8 sm:py-10 sm:pb-28">
       <div className="mx-auto w-full max-w-3xl">
         <div className="divider mb-6 animate-fade-up sm:mb-8">{copy.venueKicker}</div>
 
         <article
           className="overflow-hidden rounded-[28px] animate-fade-up anim-delay-1 backdrop-blur-md"
           style={{
-            border: '1px solid rgba(209, 148, 153, 0.22)',
-            background: 'rgba(255,255,255,0.32)',
-            boxShadow: '0 22px 60px rgba(209,148,153,0.12)',
+            border: '1px solid var(--border-subtle)',
+            background: 'var(--surface-glass)',
+            boxShadow: '0 22px 60px var(--shadow-accent)',
           }}
         >
           <div className="p-3 sm:p-4" style={{ background: 'rgba(255,255,255,0.18)' }}>
             <div
               className="relative overflow-hidden rounded-[22px]"
               style={{
-                border: '3px double rgba(209, 148, 153, 0.45)',
+                border: '3px double rgba(var(--rgb-accent), 0.45)',
                 boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.6)',
               }}
             >
@@ -37,10 +37,10 @@ export default function VenueSection() {
               )}
               <div
                 className="pointer-events-none absolute inset-0"
-                style={{ background: 'linear-gradient(180deg, rgba(44,38,34,0.04), rgba(44,38,34,0.32))' }}
+                style={{ background: 'linear-gradient(180deg, rgba(var(--rgb-foreground),0.04), rgba(var(--rgb-foreground),0.32))' }}
               />
               <div className="absolute bottom-4 start-5 end-5">
-                <p className={`text-[10px] uppercase tracking-[0.42em] text-white/90 ${isArabic ? 'font-arabic tracking-[0.14em] text-sm normal-case' : ''}`}>
+                <p className={`font-sans text-[10px] uppercase tracking-[0.42em] text-white/90 ${isArabic ? 'font-arabic tracking-[0.14em] text-sm normal-case' : ''}`}>
                   {copy.eventLabel}
                 </p>
                 <p className={`font-serif text-3xl font-light text-white sm:text-4xl ${isArabic ? 'font-arabic' : ''}`}>
@@ -59,7 +59,7 @@ export default function VenueSection() {
                     onClick={() => setActive(index)}
                     className="overflow-hidden rounded-[14px] focus:outline-none focus-visible:ring-2 focus-visible:ring-rose/40"
                     style={{
-                      border: on ? '2px solid rgba(209,148,153,0.7)' : '2px solid rgba(209,148,153,0.22)',
+                      border: on ? '2px solid rgba(var(--rgb-accent),0.7)' : '2px solid var(--border-subtle)',
                     }}
                     aria-label={copy.venueAlts[img.key]}
                     aria-pressed={on}
@@ -72,7 +72,7 @@ export default function VenueSection() {
           </div>
 
           <div className="space-y-4 px-7 py-8 text-center sm:px-10">
-            <h2 className={`text-ink ${isArabic ? 'font-arabic text-3xl' : 'font-serif text-3xl font-light sm:text-4xl'}`}>
+            <h2 className={`text-rose ${isArabic ? 'font-ruqaa text-3xl' : 'font-serif text-3xl font-light sm:text-4xl'}`}>
               {copy.venueName}
             </h2>
             {!isArabic && (
@@ -91,7 +91,7 @@ export default function VenueSection() {
                 </button>
               </a>
             </div>
-            <p className="border-t pt-5 text-xs italic text-dim" style={{ borderColor: 'rgba(209,148,153,0.2)' }}>
+            <p className="border-t pt-5 text-xs italic text-dim" style={{ borderColor: 'rgba(var(--rgb-accent),0.2)' }}>
               {copy.venueNote}
             </p>
           </div>
