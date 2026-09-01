@@ -9,11 +9,6 @@ export const QURAN = {
   refEn: 'Surah Ar-Rum · 30:21',
 }
 
-export const WELCOME = {
-  ar: 'أهلاً وسهلاً بأحبابنا',
-  en: 'A warm welcome to our dear family and friends',
-}
-
 export const BLESSING = {
   ar: 'بَارَكَ اللهُ لَهُمَا وَبَارَكَ عَلَيْهِمَا وَجَمَعَ بَيْنَهُمَا فِي خَيْر',
   en: 'May Allah bless them, shower His blessings upon them, and unite them in all that is good.',
@@ -40,7 +35,7 @@ export const INVITATION = {
   copy: {
     en: {
       documentTitle: 'Mohamed & Miss S — Katb Kitab',
-      kicker: 'With all our love, we welcome you',
+      kicker: 'With love and joy, we welcome you',
       nameFirst: 'Mohamed',
       nameSecond: 'Miss S',
       namesLine: 'Mohamed & Miss S',

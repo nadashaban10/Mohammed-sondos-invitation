@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { QURAN, WELCOME } from '../invitationData'
+import { QURAN } from '../invitationData'
 import MixedName from './MixedName'
 import Petals from './Petals'
 import { useLanguage } from '../context/LanguageProvider'
@@ -138,14 +138,15 @@ export default function InviteGate({ onOpen }) {
           </h1>
 
           <div className="mx-auto mt-6 max-w-md space-y-4 text-center animate-fade-up anim-delay-3">
-            <div>
+            {isArabic ? (
               <p className="quote-ar font-ruqaa text-[clamp(1.1rem,4vw,1.4rem)] leading-[1.9] tracking-normal" dir="rtl" lang="ar">
-                {WELCOME.ar}
+                {copy.photoCaption}
               </p>
-              <p className="mt-1 font-serif text-sm italic text-ink sm:text-[15px]">
-                {WELCOME.en}
+            ) : (
+              <p className="font-serif text-base italic leading-relaxed text-ink sm:text-lg">
+                {copy.photoCaption}
               </p>
-            </div>
+            )}
             {isArabic ? (
               <p className="quote-ar font-ruqaa text-[clamp(1.15rem,4.2vw,1.5rem)] leading-[1.9] tracking-normal" dir="rtl" lang="ar">
                 «{copy.childhoodQuote}»
