@@ -3,7 +3,7 @@ import { buildGoogleCalendarUrl } from './calendar'
 import WeddingCalendar from './WeddingCalendar'
 import Petals from './Petals'
 import ShareButton from './ShareButton'
-import { WELCOME, CHILDHOOD_QUOTE } from '../invitationData'
+import { WELCOME } from '../invitationData'
 import MixedName from './MixedName'
 import { useLanguage } from '../context/LanguageProvider'
 
@@ -78,10 +78,15 @@ export default function Hero() {
                 {WELCOME.ar}
               </p>
               <p className="mt-1 text-center font-serif text-sm italic text-muted sm:text-[15px]">{WELCOME.en}</p>
-              <p className="quote-ar mt-5 text-center font-ruqaa text-[clamp(1.35rem,5vw,1.85rem)] leading-[1.9]" dir="rtl" lang="ar">
-                «{CHILDHOOD_QUOTE.ar}»
-              </p>
-              <p className="mt-1 text-center font-serif text-sm italic text-muted sm:text-[15px]">{CHILDHOOD_QUOTE.en}</p>
+              {isArabic ? (
+                <p className="quote-ar mt-5 text-center font-ruqaa text-[clamp(1.35rem,5vw,1.85rem)] leading-[1.9]" dir="rtl" lang="ar">
+                  «{copy.childhoodQuote}»
+                </p>
+              ) : (
+                <p className="mt-5 text-center font-serif text-base italic leading-relaxed text-muted sm:text-lg">
+                  {copy.childhoodQuote}
+                </p>
+              )}
             </div>
           </div>
 
