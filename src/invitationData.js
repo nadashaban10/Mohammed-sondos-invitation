@@ -61,8 +61,6 @@ export const INVITATION = {
       venueName: 'Al-Ali Al-Azeem Mosque',
       venueArabicName: 'مسجد العلي العظيم',
       venueArea: 'Almazah, Heliopolis, Cairo, Egypt',
-      venueDescription:
-        'A contemporary Egyptian mosque of ivory marble, quiet arches, and warm light in Almazah.',
       venueNote: 'Please come a few minutes early so we can welcome you with love.',
       venueAlts: {
         exterior: 'Exterior of Al-Ali Al-Azeem Mosque in Almazah',
@@ -135,7 +133,6 @@ export const INVITATION = {
       venueName: 'مسجد العلي العظيم',
       venueArabicName: 'مسجد العلي العظيم',
       venueArea: 'ألماظة، مصر الجديدة، القاهرة، مصر',
-      venueDescription: 'صرح إسلامي معاصر من الرخام العاجي والأقواس الهادئة في ألماظة.',
       venueNote: 'تعالوا قبل الموعد بدقائق، لنرحب بكم بكل حب.',
       venueAlts: {
         exterior: 'واجهة مسجد العلي العظيم في ألماظة',

@@ -80,9 +80,6 @@ export default function VenueSection() {
                 {copy.venueArabicName}
               </p>
             )}
-            <p className={`text-sm leading-relaxed text-muted ${isArabic ? 'font-arabic text-base' : ''}`}>
-              {copy.venueDescription}
-            </p>
             <p className={`text-sm text-muted ${isArabic ? 'font-arabic' : ''}`}>{copy.venueArea}</p>
             <div className="flex justify-center pt-2">
               <a href={invitation.mapsUrl} target="_blank" rel="noopener noreferrer">
