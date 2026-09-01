@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { INVITATION } from '../invitationData'
 import { useLanguage } from '../context/LanguageProvider'
 
 function invitationUrl() {
@@ -7,7 +8,8 @@ function invitationUrl() {
   return `${origin}${pathname}`
 }
 
-function buildSharePayload(copy) {
+function buildSharePayload() {
+  const copy = INVITATION.copy.en
   const url = invitationUrl()
   const title = `${copy.namesLine} — ${copy.eventLabel}`
   const details = [copy.weekday, copy.date, copy.time].filter(Boolean).join(' · ')
@@ -57,7 +59,7 @@ export default function ShareButton() {
   }
 
   const handleShare = async () => {
-    const payload = buildSharePayload(copy)
+    const payload = buildSharePayload()
     if (typeof navigator.share === 'function') {
       try {
         await navigator.share({
@@ -73,7 +75,7 @@ export default function ShareButton() {
     setMenuOpen((open) => !open)
   }
 
-  const payload = buildSharePayload(copy)
+  const payload = buildSharePayload()
 
   return (
     <div ref={rootRef} className="relative">
