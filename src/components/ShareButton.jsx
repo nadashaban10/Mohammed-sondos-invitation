@@ -1,28 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { INVITATION } from '../invitationData'
 import { useLanguage } from '../context/LanguageProvider'
-
-function invitationUrl() {
-  const { origin, pathname } = window.location
-  return `${origin}${pathname}`
-}
-
-function buildSharePayload() {
-  const copy = INVITATION.copy.en
-  const url = invitationUrl()
-  const title = `${copy.namesLine} — ${copy.eventLabel}`
-  const details = [copy.weekday, copy.date, copy.time].filter(Boolean).join(' · ')
-  const place = [copy.venueName, copy.venueArea].filter(Boolean).join(' — ')
-  const text = [copy.namesLine, copy.inviteLine, details, place].filter(Boolean).join('\n')
-  return { title, text, url }
-}
 
 export default function ShareButton() {
   const { copy, isArabic } = useLanguage()
   const [toast, setToast] = useState('')
-  const [menuOpen, setMenuOpen] = useState(false)
-  const rootRef = useRef(null)
 
   useEffect(() => {
     if (!toast) return undefined
@@ -30,81 +12,28 @@ export default function ShareButton() {
     return () => window.clearTimeout(id)
   }, [toast])
 
-  useEffect(() => {
-    if (!menuOpen) return undefined
-    const onPointer = (event) => {
-      if (!rootRef.current?.contains(event.target)) setMenuOpen(false)
-    }
-    const onKey = (event) => {
-      if (event.key === 'Escape') setMenuOpen(false)
-    }
-    document.addEventListener('pointerdown', onPointer)
-    document.addEventListener('keydown', onKey)
-    return () => {
-      document.removeEventListener('pointerdown', onPointer)
-      document.removeEventListener('keydown', onKey)
-    }
-  }, [menuOpen])
-
-  const copyLink = async (url) => {
-    await navigator.clipboard.writeText(url)
-    setToast(copy.shareCopied)
-    setMenuOpen(false)
-  }
-
-  const openWhatsApp = (payload) => {
-    const message = `${payload.title}\n\n${payload.text}\n\n${payload.url}`
-    window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer')
-    setMenuOpen(false)
-  }
-
   const handleShare = async () => {
-    const payload = buildSharePayload()
-    if (typeof navigator.share === 'function') {
-      try {
-        await navigator.share({
-          title: payload.title,
-          text: payload.text,
-          url: payload.url,
-        })
-        return
-      } catch (err) {
-        if (err?.name === 'AbortError') return
-      }
+    const data = {
+      title: copy.namesLine,
+      text: copy.shareText,
+      url: window.location.href,
     }
-    setMenuOpen((open) => !open)
+    try {
+      if (navigator.share) {
+        await navigator.share(data)
+        return
+      }
+      await navigator.clipboard.writeText(window.location.href)
+      setToast(copy.shareCopied)
+    } catch (e) {}
   }
-
-  const payload = buildSharePayload()
 
   return (
-    <div ref={rootRef} className="relative">
-      <button
-        type="button"
-        className="outline-btn inline-flex min-h-11 items-center gap-2.5"
-        onClick={handleShare}
-        aria-expanded={menuOpen}
-        aria-haspopup="menu"
-      >
+    <>
+      <button type="button" className="outline-btn inline-flex min-h-11 items-center gap-2.5" onClick={handleShare}>
         <EnvelopeIcon />
         {copy.shareCta}
       </button>
-
-      {menuOpen ? (
-        <div className="share-menu" role="menu" aria-label={copy.shareCta}>
-          <button
-            type="button"
-            role="menuitem"
-            className="share-menu-item"
-            onClick={() => copyLink(payload.url).catch(() => {})}
-          >
-            {copy.shareCopyLink}
-          </button>
-          <button type="button" role="menuitem" className="share-menu-item" onClick={() => openWhatsApp(payload)}>
-            {copy.shareWhatsApp}
-          </button>
-        </div>
-      ) : null}
 
       {createPortal(
         <div className={`invite-toast ${toast ? 'show' : ''} ${isArabic ? 'font-arabic' : 'font-serif'}`} role="status" aria-live="polite">
@@ -112,7 +41,7 @@ export default function ShareButton() {
         </div>,
         document.body,
       )}
-    </div>
+    </>
   )
 }
 

@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useCountdown } from './useCountdown'
-import { buildGoogleCalendarUrl } from './calendar'
+import { downloadWeddingCalendar } from './calendar'
 import Petals from './Petals'
 import ShareButton from './ShareButton'
 import MixedName from './MixedName'
@@ -19,15 +21,23 @@ function CountCell({ label, value }) {
 export default function Hero() {
   const { copy, invitation, isArabic } = useLanguage()
   const start = new Date(invitation.weddingDate)
-  const end = new Date(invitation.endDate)
   const { d, h, m, s } = useCountdown(start.getTime())
-  const googleUrl = buildGoogleCalendarUrl({
-    title: `${copy.namesLine} — ${copy.eventLabel}`,
-    start,
-    end,
-    location: `${copy.venueName} — ${copy.venueArea}`,
-    description: copy.inviteLine,
-  })
+  const [toast, setToast] = useState('')
+
+  useEffect(() => {
+    if (!toast) return undefined
+    const id = window.setTimeout(() => setToast(''), 2600)
+    return () => window.clearTimeout(id)
+  }, [toast])
+
+  const handleAddCalendar = () => {
+    downloadWeddingCalendar({
+      summary: copy.calendarSummary,
+      location: copy.calendarLocation,
+      description: copy.calendarDescription,
+    })
+    setToast(copy.calendarSaved)
+  }
 
   return (
     <section id="hero" className="snap-panel relative flex flex-col items-center justify-center bg-transparent px-5 pb-10 pt-[max(4.75rem,calc(env(safe-area-inset-top)+3.5rem))] sm:px-8 sm:pb-12 sm:pt-20">
@@ -123,16 +133,20 @@ export default function Hero() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-3 pt-1 lg:justify-start">
-              <a href={googleUrl} target="_blank" rel="noreferrer">
-                <button type="button" className="outline-btn">
-                  {copy.addCalendar}
-                </button>
-              </a>
+              <button type="button" className="outline-btn" onClick={handleAddCalendar}>
+                {copy.addCalendar}
+              </button>
               <ShareButton />
             </div>
           </div>
         </div>
       </div>
+      {createPortal(
+        <div className={`invite-toast ${toast ? 'show' : ''} ${isArabic ? 'font-arabic' : 'font-serif'}`} role="status" aria-live="polite">
+          {toast}
+        </div>,
+        document.body,
+      )}
     </section>
   )
 }

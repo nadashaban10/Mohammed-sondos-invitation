@@ -1,25 +1,34 @@
-function pad(n) {
-  return String(n).padStart(2, '0')
+function icsEscape(value) {
+  return String(value ?? '')
+    .replace(/\\/g, '\\\\')
+    .replace(/\n/g, '\\n')
+    .replace(/,/g, '\\,')
+    .replace(/;/g, '\\;')
 }
-function toICSDateUTC(date) {
-  const d = new Date(date)
-  return (
-    d.getUTCFullYear() +
-    pad(d.getUTCMonth() + 1) +
-    pad(d.getUTCDate()) +
-    'T' +
-    pad(d.getUTCHours()) +
-    pad(d.getUTCMinutes()) +
-    pad(d.getUTCSeconds()) +
-    'Z'
-  )
-}
-export function buildGoogleCalendarUrl({ title, start, end, location, description }) {
-  const base = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
-  const params = new URLSearchParams()
-  params.set('text', title)
-  params.set('dates', `${toICSDateUTC(start)}/${toICSDateUTC(end)}`)
-  if (location) params.set('location', location)
-  if (description) params.set('details', description)
-  return `${base}&${params.toString()}`
+
+export function downloadWeddingCalendar({ summary, location, description }) {
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Mohamed and Sondos//Wedding//EN',
+    'BEGIN:VEVENT',
+    'UID:mohamed-sondos-20260920@wedding',
+    'DTSTAMP:20260101T000000Z',
+    'DTSTART:20260920T183000Z',
+    'DTEND:20260920T203000Z',
+    `SUMMARY:${icsEscape(summary)}`,
+    `LOCATION:${icsEscape(location)}`,
+    `DESCRIPTION:${icsEscape(description)}`,
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ].join('\r\n')
+
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' })
+  const a = document.createElement('a')
+  a.href = URL.createObjectURL(blob)
+  a.download = 'mohamed-sondos-wedding.ics'
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  window.setTimeout(() => URL.revokeObjectURL(a.href), 4000)
 }
