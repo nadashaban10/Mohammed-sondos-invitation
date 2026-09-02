@@ -139,17 +139,17 @@ export default function InviteGate({ onOpen }) {
 
           <div className="mx-auto mt-6 max-w-md space-y-4 text-center animate-fade-up anim-delay-3">
             {isArabic ? (
-              <p className="quote-ar font-ruqaa text-[clamp(1.1rem,4vw,1.4rem)] leading-[1.9] tracking-normal" dir="rtl" lang="ar">
+              <p className="font-arabic text-[clamp(0.98rem,3.4vw,1.15rem)] leading-[1.95] tracking-normal" dir="rtl" lang="ar">
                 {copy.photoCaption}
               </p>
             ) : (
-              <p className="font-serif text-base italic leading-relaxed text-ink sm:text-lg">
+              <p className="font-serif text-[15px] italic leading-relaxed text-ink sm:text-base">
                 {copy.photoCaption}
               </p>
             )}
             {isArabic ? (
-              <p className="quote-ar font-ruqaa text-[clamp(1.15rem,4.2vw,1.5rem)] leading-[1.9] tracking-normal" dir="rtl" lang="ar">
-                «{copy.childhoodQuote}»
+              <p className="quote-ar font-ruqaa text-[clamp(1.1rem,4vw,1.35rem)] leading-[1.9] tracking-normal" dir="rtl" lang="ar">
+                {copy.childhoodQuote}
               </p>
             ) : (
               <p className="font-serif text-base italic leading-relaxed text-ink sm:text-lg">

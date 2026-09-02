@@ -1,6 +1,5 @@
 import { useCountdown } from './useCountdown'
 import { buildGoogleCalendarUrl } from './calendar'
-import WeddingCalendar from './WeddingCalendar'
 import Petals from './Petals'
 import ShareButton from './ShareButton'
 import MixedName from './MixedName'
@@ -74,20 +73,20 @@ export default function Hero() {
                 </div>
               </div>
               {isArabic ? (
-                <p className="quote-ar mt-5 text-center font-ruqaa text-[clamp(1.2rem,4.4vw,1.65rem)] leading-[1.9]" dir="rtl" lang="ar">
+                <p className="mt-5 text-center font-arabic text-[clamp(1rem,3.6vw,1.2rem)] leading-[1.95]" dir="rtl" lang="ar">
                   {copy.photoCaption}
                 </p>
               ) : (
-                <p className="mt-5 text-center font-serif text-base italic leading-relaxed text-muted sm:text-lg">
+                <p className="mt-5 text-center font-serif text-[15px] italic leading-relaxed text-muted sm:text-base">
                   {copy.photoCaption}
                 </p>
               )}
               {isArabic ? (
-                <p className="quote-ar mt-5 text-center font-ruqaa text-[clamp(1.35rem,5vw,1.85rem)] leading-[1.9]" dir="rtl" lang="ar">
-                  «{copy.childhoodQuote}»
+                <p className="quote-ar mt-4 text-center font-ruqaa text-[clamp(1.15rem,4.2vw,1.45rem)] leading-[1.9]" dir="rtl" lang="ar">
+                  {copy.childhoodQuote}
                 </p>
               ) : (
-                <p className="mt-5 text-center font-serif text-base italic leading-relaxed text-muted sm:text-lg">
+                <p className="mt-4 text-center font-serif text-base italic leading-relaxed text-muted sm:text-lg">
                   {copy.childhoodQuote}
                 </p>
               )}
@@ -130,10 +129,6 @@ export default function Hero() {
                 </button>
               </a>
               <ShareButton />
-            </div>
-
-            <div className="mx-auto max-w-md pt-2 lg:mx-0 lg:max-w-none">
-              <WeddingCalendar date={start} label={copy.calendarLabel} saveLabel={copy.saveTheDate} arabic={isArabic} />
             </div>
           </div>
         </div>
